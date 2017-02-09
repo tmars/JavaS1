@@ -6,6 +6,7 @@ package com.talipov;
 public class Waiter implements Runnable {
     private final Counter counter;
     private int shift;
+
     public Waiter(Counter c, int s){
         this.counter = c;
         this.shift = s;
@@ -13,6 +14,8 @@ public class Waiter implements Runnable {
 
     @Override
     public void run() {
+        String name = Thread.currentThread().getName();
+
         while (true) {
             synchronized (this.counter) {
                 try {
@@ -21,7 +24,7 @@ public class Waiter implements Runnable {
                     e.printStackTrace();
                 }
                 if (counter.getVal() % shift == 0) {
-                    System.out.println("Alert!!! " + shift);
+                    System.out.println("Alert!!! Thread: " + name);
                 }
             }
         }

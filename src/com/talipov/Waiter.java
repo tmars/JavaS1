@@ -19,11 +19,11 @@ public class Waiter implements Runnable {
         while (true) {
             synchronized (this.counter) {
                 try {
-                    counter.wait();
+                    this.counter.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (counter.getVal() % shift == 0) {
+                if (this.counter.getVal() % shift == 0) {
                     System.out.println("Alert!!! Thread: " + name);
                 }
             }
